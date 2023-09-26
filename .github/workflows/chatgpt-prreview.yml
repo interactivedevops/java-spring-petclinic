@@ -13,3 +13,4 @@ jobs:
           SONARQUBE_PROJECT_KEY: ${{ secrets.SONARQUBE_PROJECT_KEY }}
           GITHUB_PR_ID: ${{ github.event.number }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          github_token: ${{ secrets.GH_TOKEN }}
