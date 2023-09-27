@@ -8,7 +8,7 @@ jobs:
     name: ChatGPT explain code
     steps:
       - name: ChatGTP explain code
-        uses: interactivedevops/chatgpt-codereview@master
+        uses: interactivedevops/chatgpt-codereview@main
         with:
           SONARQUBE_URL: ${{ secrets.SONARQUBE_URL }}
           SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
