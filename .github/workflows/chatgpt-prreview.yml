@@ -8,9 +8,13 @@ jobs:
     name: ChatGPT explain code
     steps:
       - name: ChatGTP explain code
-        uses: interactivedevops/codereview@develop
+        uses: interactivedevops/chatgpt-codereview@master
         with:
-          SONARQUBE_PROJECT_KEY: ${{ secrets.SONARQUBE_PROJECT_KEY }}
+          SONARQUBE_URL: ${{ secrets.SONARQUBE_URL }}
+          SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          CHATGPT_API_URL: ${{ secrets.CHATGPT_API_URL }}
+          CHATGPT_API_KEY: ${{ secrets.CHATGPT_API_KEY }}
+          CHATGPT_DEPLOYMENT_ID: ${{ secrets.CHATGPT_DEPLOYMENT_ID }}
           GITHUB_PR_ID: ${{ github.event.number }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          github_token: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          SONARQUBE_PROJECT_KEY:  ${{ secrets.SONARQUBE_PROJECT_KEY }}
