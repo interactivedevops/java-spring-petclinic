@@ -25,6 +25,8 @@ jobs:
           java-version: ${{matrix.java}}
           distribution: 'adopt'
           cache: maven
+      - name: Fortmat Java Code
+        run: mvn spring-javaformat:apply
       - name: Build with Maven Wrapper
         run: ./mvnw -B package
       - name: Cache SonarQube packages
@@ -38,6 +40,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn spring-javaformat:apply && mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=java-spring-petclinic-import -Dsonar.projectName='java-spring-petclinic/import'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=java-spring-petclinic-import -Dsonar.projectName='java-spring-petclinic/import'
 
     
