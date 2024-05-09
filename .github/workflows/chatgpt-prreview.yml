@@ -1,19 +1,27 @@
 on:
+  # the 1st condition
+  workflow_run:
+    workflows: ["mvnbuild"]
+    branches: [main]
+    types:
+      - completed
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  hello_world_job:
+  java-spring-petclinic:
     runs-on: ubuntu-latest
     name: ChatGPT explain code
     steps:
       - name: ChatGTP explain code
-        uses: cirolini/chatgpt-github-actions@v1.3
+        uses: interactivedevops/chatgpt-codereview@main
         with:
-          openai_api_key: ${{ secrets.openai_api_key }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_pr_id: ${{ github.event.number }}
-          openai_engine: "text-davinci-002" #optional
-          openai_temperature: 0.5 #optional
-          openai_max_tokens: 2048 #optional
-          mode: file # file or patch 
+          SONARQUBE_URL: ${{ secrets.SONARQUBE_URL }}
+          SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          SONARQUBE_PROJECT_KEY: ${{ secrets.SONARQUBE_PROJECT_KEY }}
+          CHATGPT_API_URL: ${{ secrets.CHATGPT_API_URL }}
+          CHATGPT_API_KEY: ${{ secrets.CHATGPT_API_KEY }}
+          CHATGPT_DEPLOYMENT_ID: ${{ secrets.CHATGPT_DEPLOYMENT_ID }}
+          GITHUB_PR_ID: ${{ github.event.number }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
