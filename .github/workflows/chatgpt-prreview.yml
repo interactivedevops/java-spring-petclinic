@@ -1,12 +1,12 @@
 on:
-  pull_request:
-    types: [opened, synchronize]
   # the 1st condition
   workflow_run:
     workflows: ["mvnbuild"]
     branches: [main]
     types:
       - completed
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   java-spring-petclinic:
