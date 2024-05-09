@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI with Maven
+name: mvnbuild
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
       - name: Fortmat Java Code
         run: mvn spring-javaformat:apply
       - name: Build with Maven Wrapper
-        run: ./mvnw -B package
+        run: ./mvnw -B package -Dmaven.test.skip=true 
       - name: Cache SonarQube packages
         uses: actions/cache@v1
         with:
@@ -40,6 +40,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=java-spring-petclinic-import -Dmaven.test.skip=true -Dsonar.projectName='java-spring-petclinic/import'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=java-spring-petclinic-import -Dsonar.projectName='java-spring-petclinic/import'
 
     
